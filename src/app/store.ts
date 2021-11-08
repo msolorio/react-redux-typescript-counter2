@@ -7,8 +7,6 @@ const store = configureStore({
   }
 });
 
-// Retrieves type (shape) of state object
-// Research further
 export type RootState = ReturnType<typeof store.getState>
 
 // Retrieves type (shape) of dispatch

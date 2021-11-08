@@ -5,8 +5,11 @@ import { increment } from './features/counter/counterSlice';
 import { RootState } from './app/store';
 import './App.css';
 
+
 function App() {
-  const count = useAppSelector((state: RootState) => state.counter.value);
+  const count = useAppSelector((state: RootState) => {
+    return state.counter.value
+  });
   const dispatch = useAppDispatch();
 
   const handleIncrement = () => {
@@ -26,3 +29,4 @@ function App() {
 }
 
 export default App;
+  
