@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 // imports typed versions of useSelector and useDispatch
 import { useAppSelector, useAppDispatch } from './app/hooks';
-import { increment } from './features/counter/counterSlice';
+import {
+  increment,
+  decrement,
+  changeByAmount
+} from './features/counter/counterSlice';
 import { RootState } from './app/store';
 import './App.css';
 
 
 function App() {
+  const [amount, setAmount] = useState(0);
+
   const count = useAppSelector((state: RootState) => {
     return state.counter.value
   });
@@ -14,6 +20,20 @@ function App() {
 
   const handleIncrement = () => {
     dispatch(increment());
+  }
+
+  const handleDecrement = () => {
+    dispatch(decrement());
+  }
+
+  const handleChangeByAmount = () => {
+    dispatch(changeByAmount(amount));
+  }
+
+  const handleNumChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const changeAmount = Number(event.target.value);
+
+    setAmount(changeAmount);
   }
 
   return (
@@ -24,9 +44,24 @@ function App() {
       <button onClick={handleIncrement}>
         Increment
       </button>
+
+      <button onClick={handleDecrement}>
+        Decrement
+      </button>
+
+      <input
+        type="number"
+        min="-5"
+        max="5"
+        value={amount}
+        onChange={(e) => handleNumChange(e)}
+      />
+
+      <button onClick={handleChangeByAmount}>
+        Change By Amount
+      </button>
     </div>
   );
 }
 
 export default App;
-  
