@@ -4,7 +4,8 @@ import { useAppSelector, useAppDispatch } from './app/hooks';
 import {
   increment,
   decrement,
-  changeByAmount
+  changeByAmount,
+  incrementAsync,
 } from './features/counter/counterSlice';
 import { RootState } from './app/store';
 import './App.css';
@@ -45,9 +46,13 @@ function App() {
         Increment
       </button>
 
+      <br />
+
       <button onClick={handleDecrement}>
         Decrement
       </button>
+
+      <br />
 
       <input
         type="number"
@@ -56,9 +61,12 @@ function App() {
         value={amount}
         onChange={(e) => handleNumChange(e)}
       />
-
       <button onClick={handleChangeByAmount}>
         Change By Amount
+      </button>
+
+      <button onClick={() => dispatch(incrementAsync(amount))}>
+        Increment Async
       </button>
     </div>
   );
